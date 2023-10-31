@@ -1,0 +1,13 @@
+return waypoint values = DONE
+add new way points as obstacles
+try two start and end points
+
+
+
+=======================================================================
+
+1. step one, RRT* to work on 3D environment is coming along fine = DONE
+2. step two, get the map environment here = DONE
+3. step three convert data from this environment to map and back = DONE
+4. start backend with all these three seamlesly working
+========================================================================

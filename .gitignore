@@ -1,0 +1,22 @@
+### IDEs ###
+.idea/
+.vscode/*
+*.iws
+*.iml
+*.ipr
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+bin/
+
+### Python ###
+.env
+env
+venv
+__pycache__
+.pytest_cache
+output
+project
