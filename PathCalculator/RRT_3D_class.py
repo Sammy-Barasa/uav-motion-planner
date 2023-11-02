@@ -431,6 +431,11 @@ class RRT3d:
 		
 		print(f"final: {final_path_points}")
 		return final_path_points
+	
+
+	def run_rtt_api(self,data):
+		#--------------------------------------Global Definitions---------------------------------
+		return data
 #--------------------------------------Global Definitions---------------------------------
 #node limit
 nmax = 5000
@@ -514,6 +519,7 @@ def draw ():
 
 #--------------------------------------RRT Implementation---------------------------------
 def main():
+	
 	#balance between extending and biasing	
 	for i in range(0,nmax):
 		if i%10!=0: G.expand()
@@ -524,9 +530,12 @@ def main():
 			break
 	G.path_to_goal()
 	G.prun()
+	test_ans=G.returnpath()
+	print("test_ans: ",test_ans)
+	return test_ans
 		
 	#display initial plan under limited sensing
-	draw()
+	# draw()
 	
 	
 
@@ -535,3 +544,4 @@ def main():
 # run main when RRT is called
 if __name__ == '__main__':
     main()
+	# run_rtt_api()

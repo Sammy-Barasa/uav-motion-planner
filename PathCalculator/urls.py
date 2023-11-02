@@ -21,6 +21,8 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('',TemplateView.as_view(template_name="index.html")),
+    path('home/',TemplateView.as_view(template_name="index.html")),
+    path('results/',TemplateView.as_view(template_name="index.html")),
     path('locations/', LocationList.as_view(), name='location-list'),
     path('locations/<int:pk>/', LocationDetail.as_view(), name='location-detail'),
     path('obstacles/', ObstacleList.as_view(), name='obstacle-list'),

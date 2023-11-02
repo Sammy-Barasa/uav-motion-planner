@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'PathCalculator.apps.PathcalculatorConfig',
     "corsheaders",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -170,7 +171,7 @@ CORS_ORIGIN_WHITELIST = ['localhost:3000','localhost:8000']
 
 
 # rest_framework settings
-# REST_FRAMEWORK = {
+REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
 #     'DEFAULT_PERMISSION_CLASSES': [
@@ -182,9 +183,9 @@ CORS_ORIGIN_WHITELIST = ['localhost:3000','localhost:8000']
 #         'rest_framework_simplejwt.authentication.JWTAuthentication',
 # #         'rest_framework.authentication.SessionAuthentication',
 #     ),
-#     'DEFAULT_RENDERER_CLASSES': [
-#         'rest_framework.renderers.JSONRenderer',
-#         'rest_framework.renderers.BrowsableAPIRenderer',
-#     ],
-#     'DEFAULT_METADATA_CLASS': 'rest_framework.metadata.SimpleMetadata',
-# }
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'DEFAULT_METADATA_CLASS': 'rest_framework.metadata.SimpleMetadata',
+}
