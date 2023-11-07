@@ -1,4 +1,5 @@
-from RRT_3D_class import RRT3d, env3d
+# from RRT_3D_class import RRT3d, env3d
+from algo_copy import RRT3d, env3d
 import matplotlib.pyplot as plt
 nmax = 5000
 
@@ -32,12 +33,18 @@ vz = [0,100,0,60,50,80]
 hvx= [15,15,25,25,25,25,35,35]
 hvy= [15,30,30,15,40,60,60,40]
 
+
 #create an RRT tree with a start node
-G=RRT3d(nstart)
+G=RRT3d(nstart,xgmin=xgmin,xgmax=xgmax,ygmin=ygmin,ygmax=ygmax,zgmin=zgmin,zgmax=zgmax,xg=xg,yg=yg,zg=zg,dmax=dmax,nmax=nmax)
+
 
 #environment instance
 # E=env3d(vx,vy,vz,0,4900,0,3100,0,3000)
-E=env3d(vx,vy,vz,0,100,0,100,0,100)
+E=env3d(vx,vy,vz,0,100,0,100,0,100,hvx=hvx,hvy=hvy,G=G,xgmin=xgmin,xgmax=xgmax,ygmin=ygmin,ygmax=ygmax,zgmin=zgmin,zgmax=zgmax)
+G.set_E(E)
+G.set_G(G)
+
+
 #draw setup
 fig = plt.figure()
 # ax = fig.gca(projection='3d')

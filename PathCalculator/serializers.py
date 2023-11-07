@@ -21,7 +21,7 @@ class DroneFlightSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CreateDroneFlightSerializer(serializers.Serializers):
+class CreateDroneFlightSerializer(serializers.Serializer):
     json_data = serializers.JSONField()
     id = serializers.IntegerField(read_only=True)
 

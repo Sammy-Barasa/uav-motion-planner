@@ -1,0 +1,183 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.7052538,
+          -1.4319392,
+          1837.90052960423
+        ]
+      },
+      "properties": {
+        "name": "Marker1",
+        "styleUrl": "#__managed_style_0FFDB0CCE82C252CA6E2",
+        "styleMapHash": {
+          "normal": "#__managed_style_130792B8302C252CA6E2",
+          "highlight": "#__managed_style_07833E89772C252CA6E3"
+        }
+      },
+      "id": "0F0091F8182C254248C2"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.7021043,
+          -1.1528961,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Marker2",
+        "styleUrl": "#__managed_style_0FFDB0CCE82C252CA6E2",
+        "styleMapHash": {
+          "normal": "#__managed_style_130792B8302C252CA6E2",
+          "highlight": "#__managed_style_07833E89772C252CA6E3"
+        }
+      },
+      "id": "017644A41F2C2530D96A"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.14407463605581,
+          -1.436615725073458,
+          1625.905935414768
+        ]
+      },
+      "properties": {
+        "name": "Marker3",
+        "styleUrl": "#__managed_style_0FFDB0CCE82C252CA6E2",
+        "styleMapHash": {
+          "normal": "#__managed_style_130792B8302C252CA6E2",
+          "highlight": "#__managed_style_07833E89772C252CA6E3"
+        }
+      },
+      "id": "0030DAC11B2C25317F2E"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.14316552159382,
+          -1.155487978825369,
+          1494.607207846235
+        ]
+      },
+      "properties": {
+        "name": "Marker4",
+        "styleUrl": "#__managed_style_0FFDB0CCE82C252CA6E2",
+        "styleMapHash": {
+          "normal": "#__managed_style_130792B8302C252CA6E2",
+          "highlight": "#__managed_style_07833E89772C252CA6E3"
+        }
+      },
+      "id": "0A7D04359E2C2531E990"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              36.7052537746631,
+              -1.431938893927415,
+              0
+            ],
+            [
+              37.14406899283725,
+              -1.436487721437973,
+              0
+            ],
+            [
+              37.14373236927713,
+              -1.15366242932541,
+              0
+            ],
+            [
+              36.70210423505043,
+              -1.152893698225115,
+              0
+            ],
+            [
+              36.7052537746631,
+              -1.431938893927415,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "nairobi area selected",
+        "styleUrl": "#__managed_style_0FFDB0CCE82C252CA6E2",
+        "styleMapHash": {
+          "normal": "#__managed_style_130792B8302C252CA6E2",
+          "highlight": "#__managed_style_07833E89772C252CA6E3"
+        }
+      },
+      "id": "09BDD0C1E02C252FE98E"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            36.70525279876905,
+            -1.431936111594629,
+            0
+          ],
+          [
+            37.14407501016223,
+            -1.436612862978913,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "name": "M1toM3",
+        "styleUrl": "#__managed_style_0FFDB0CCE82C252CA6E2",
+        "styleMapHash": {
+          "normal": "#__managed_style_130792B8302C252CA6E2",
+          "highlight": "#__managed_style_07833E89772C252CA6E3"
+        }
+      },
+      "id": "098CD4FA892C254BE2E4"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            36.70210544238266,
+            -1.152894316797495,
+            0
+          ],
+          [
+            36.70525415635743,
+            -1.431938787383678,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "name": "M1toM2",
+        "styleUrl": "#__managed_style_0FFDB0CCE82C252CA6E2",
+        "styleMapHash": {
+          "normal": "#__managed_style_130792B8302C252CA6E2",
+          "highlight": "#__managed_style_07833E89772C252CA6E3"
+        }
+      },
+      "id": "0992BAC94B2C254E2360"
+    }
+  ]
+}
