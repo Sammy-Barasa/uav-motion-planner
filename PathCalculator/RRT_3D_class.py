@@ -532,10 +532,10 @@ def main():
 	G.prun()
 	test_ans=G.returnpath()
 	print("test_ans: ",test_ans)
-	return test_ans
+#  test_ans
 		
 	#display initial plan under limited sensing
-	# draw()
+	draw()
 	
 	
 

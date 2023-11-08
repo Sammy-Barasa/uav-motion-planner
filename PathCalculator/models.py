@@ -11,8 +11,9 @@ class Location(models.Model):
 
 
 class Obstacle(models.Model):
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    # location = models.ForeignKey(Location, on_delete=models.CASCADE)
     description = models.TextField()
+    obstacle_data = models.JSONField()
 
     def __str__(self):
         return f"{self.description} - {self.location}"

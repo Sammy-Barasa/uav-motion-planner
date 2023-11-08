@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from PathCalculator.views import LocationList, LocationDetail, ObstacleList, ObstacleDetail, DroneFlightList, DroneFlightDetail, CreateDroneFlightView
+from PathCalculator.views import LocationList, LocationDetail, ObstacleList, ObstacleDetail, DroneFlightList, DroneFlightDetail, CreateDroneFlightView, CreateObstacleView
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -29,5 +29,6 @@ urlpatterns = [
     path('obstacles/<int:pk>/', ObstacleDetail.as_view(), name='obstacle-detail'),
     path('droneflights/', DroneFlightList.as_view(), name='droneflight-list'),
     path('droneflights/<int:pk>/', DroneFlightDetail.as_view(), name='droneflight-detail'),
-    path('createdroneflight/', CreateDroneFlightView.as_view(), name='calculateflight')
+    path('createdroneflight/', CreateDroneFlightView.as_view(), name='calculateflight'),
+    path('createobstable/', CreateObstacleView.as_view(), name='createobstacle')
 ]

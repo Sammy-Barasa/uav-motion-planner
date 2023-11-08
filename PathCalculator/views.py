@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
 from .models import Location, Obstacle, DroneFlight
-from .serializers import LocationSerializer, ObstacleSerializer, DroneFlightSerializer, CreateDroneFlightSerializer
+from .serializers import LocationSerializer, ObstacleSerializer, DroneFlightSerializer, CreateDroneFlightSerializer, CreateObstacleSerializer
 from PathCalculator.Geocalculations import Geocalculation
 
 class LocationList(generics.ListCreateAPIView):
@@ -41,15 +41,15 @@ def ComputeNodeView(start_data, end_data):
     # {"x":x,"y":y,"h":h}
     from PathCalculator.rrt_algo_api import RRT3d, env3d
     import matplotlib.pyplot as plt
-    nmax = 5000
+    nmax = 8000
 
     #goal region
-    # xg=end_data["x"]
-    # yg=end_data["y"]
-    # zg=end_data["h"]
-    xg=5
-    yg=5
-    zg=5
+    xg=end_data["x"]
+    yg=end_data["y"]
+    zg=end_data["h"]
+    # xg=5
+    # yg=5
+    # zg=5
     epsilon=5
     xgmin=xg-epsilon
     xgmax=xg+epsilon
@@ -62,17 +62,19 @@ def ComputeNodeView(start_data, end_data):
     #extend step size
     dmax = 5
     #start the root of the tree
-    # nstart =(start_data["x"],start_data["y"],start_data["h"]) 
-    nstart =(100,100,100) 
+    nstart =(start_data["x"],start_data["y"],start_data["h"]) 
+    # nstart =(100,100,100) 
     #specify vertices for rectangular obstacles (each object has four vertices)
     #obstacles known a priori
     # vx= [40,40,60,60,70,70,80,80,40,40,60,60]
     # vy= [52,100,100,52,40,60,60,40, 0,48,48, 0]
 
-    vx= [40,40,60,60,70,70,80,80,40,40,60,60]
-    vy= [52,100,100,52,40,60,60,40,0,48,48, 0]
-    vz = [0,100,0,60,50,80]
+    vx= [400,400,600,600,700,700,800,800,400,400,600,600]
+    vy= [520,1000,1000,520,400,600,600,400,0,480,480, 0]
+    vz = [0,100,0,600,500,800]
     #hidden obstacle
+    # hvx= [150,150,250,250,250,250,350,350]
+    # hvy= [150,300,300,150,400,600,600,400]
     hvx= [15,15,25,25,25,25,35,35]
     hvy= [15,30,30,15,40,60,60,40]
 
@@ -126,4 +128,29 @@ class CreateDroneFlightView(generics.GenericAPIView):
         }
 
         return Response(flight_data, status=status.HTTP_201_CREATED)
+    
+
+class CreateObstacleView(generics.GenericAPIView):
+    serializer_class = CreateObstacleSerializer
+    queryset = Obstacle.objects.all()
+    def post(self,request):
+        gc = Geocalculation()
+        object_map_data = request.data
+        
+        # print(object_map_data)
+        res1 = gc.get_mulptiple_object_map_point_to_space_point(object_map_data)
+        
+        # vals=ComputeNodeView(res1,res2)
+        # print("found space points ...")
+        # data=gc.get_distance_and_azimuth_result_points(vals)
+        # print("azimuth and distance: ",data)
+
+        # res=gc.get_new_lat_long_from_calculated_distance_and_azimuth(data)
+        # print("New_lat_long",res)
+        new_object_data = {
+            "map_points":object_map_data,
+            "space_points":res1
+        }
+
+        return Response(new_object_data, status=status.HTTP_201_CREATED)
         

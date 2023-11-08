@@ -2,8 +2,8 @@ from math import radians, sin,cos, asin, sqrt, degrees,atan
 from pygc import great_circle, great_distance
 
 class Geocalculation:
-    reference_lat = -1.4319392
-    reference_long= 36.7052538
+    reference_long = -1.4319392
+    reference_lat= 36.7052538
     ratio = 1
     def distance_between_set_lat_long(self,set_one,set_two):
             # start latitude and longitude
@@ -73,6 +73,24 @@ class Geocalculation:
 
         return {"x":x,"y":y,"h":h}
     
+    def get_single_object_map_point_to_space_point(self,object_data):
+            # [lat,long,height] 
+                    # [lat,long,height] 
+        set_two_lat_long = [object_data["lat"],object_data["long"],object_data["height"]]
+        point_distance_and_azimuth= self.get_azimuth_distance_set_lat_long_map_points(set_two_lat_long)
+        # {
+        # 'distance': array(2.67369853), 
+        # 'azimuth': 67.76046817353448, 
+        # 'reverse_azimuth': 247.76046761797653
+        # }
+
+        calc_theta = 90-(point_distance_and_azimuth["azimuth"])
+        x = (point_distance_and_azimuth["distance"]/self.ratio)* cos(radians(calc_theta))
+        y = (point_distance_and_azimuth["distance"]/self.ratio)* sin(radians(calc_theta))
+        h = set_two_lat_long[2]
+
+        return {"x":x,"y":y,"h":h}
+    
     def get_multiple_map_point_to_space_point(self,list_of_set_two_lat_long):
         # [[lat,long,height],[lat,long,height],[lat,long,height]] 
         # 
@@ -81,6 +99,19 @@ class Geocalculation:
               multiple_point_result.append(self.get_single_map_point_to_space_point(list_of_set_two_lat_long[i]))
 
         return multiple_point_result 
+    
+    def get_mulptiple_object_map_point_to_space_point(self,object_map_data):
+        # [[lat,long,height],[lat,long,height],[lat,long,height]] 
+        # 
+        object_point_result = {}   
+        for i,key in enumerate(object_map_data):
+            #   point = {}
+              res = self.get_single_object_map_point_to_space_point(object_map_data[key])
+            #   print("res: ",res)
+              object_point_result[key]= res
+
+        # print("object_point_result: ",object_point_result)
+        return object_point_result
     
     def test_functions(self):
         # marke1 and marker3
