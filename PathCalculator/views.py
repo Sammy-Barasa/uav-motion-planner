@@ -39,7 +39,7 @@ def ComputeNodeView(start_data, end_data):
     # get start from geogalculator
     # get end from geolocalculator
     # {"x":x,"y":y,"h":h}
-    from PathCalculator.algo_copy import RRT3d, env3d
+    from PathCalculator.rrt_algo_api import RRT3d, env3d
     import matplotlib.pyplot as plt
     nmax = 5000
 
