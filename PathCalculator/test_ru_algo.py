@@ -1,5 +1,5 @@
 # from RRT_3D_class import RRT3d, env3d
-from algo_copy import RRT3d, env3d
+from PathCalculator.rrt_algo_api import RRT3d, env3d
 import matplotlib.pyplot as plt
 nmax = 5000
 

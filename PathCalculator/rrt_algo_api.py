@@ -472,7 +472,7 @@ class RRT3d:
 			if i == last_val_len:
 				final_path_points.append([x[1],y[1],z[1]])
 		
-		print(f"final: {final_path_points}")
+		# print(f"final: {final_path_points}")
 		return final_path_points
 	
 

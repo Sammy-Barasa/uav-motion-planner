@@ -98,7 +98,7 @@ def ComputeNodeView(start_data, end_data):
     G.path_to_goal()
     G.prun()
     test_ans=G.returnpath()
-    print("test_ans: ",test_ans)
+    # print("test_ans: ",test_ans)
     return test_ans
 
 class CreateDroneFlightView(generics.GenericAPIView):
@@ -113,5 +113,17 @@ class CreateDroneFlightView(generics.GenericAPIView):
         res1 = gc.get_single_map_point_to_space_point([start_location["lat"],start_location["long"],start_location["h"]])
         res2 = gc.get_single_map_point_to_space_point([end_location["lat"],end_location["long"],end_location["h"]])
         vals=ComputeNodeView(res1,res2)
-        return Response(vals, status=status.HTTP_201_CREATED)
+        print("found space points ...")
+        data=gc.get_distance_and_azimuth_result_points(vals)
+        # print("azimuth and distance: ",data)
+
+        res=gc.get_new_lat_long_from_calculated_distance_and_azimuth(data)
+        # print("New_lat_long",res)
+        print("found map points ...")
+        flight_data = {
+            "map_points":res,
+            "space_points":vals
+        }
+
+        return Response(flight_data, status=status.HTTP_201_CREATED)
         
