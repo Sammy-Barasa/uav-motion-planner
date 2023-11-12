@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .models import Location, Obstacle, DroneFlight
 from .serializers import LocationSerializer, ObstacleSerializer, DroneFlightSerializer, CreateDroneFlightSerializer, CreateObstacleSerializer
 from PathCalculator.Geocalculations import Geocalculation
+from rest_framework.exceptions import ValidationError
 
 class LocationList(generics.ListCreateAPIView):
     queryset = Location.objects.all()
@@ -81,7 +82,7 @@ def ComputeNodeView(start_data, end_data):
 
     #create an RRT tree with a start node
     G=RRT3d(nstart,xgmin=xgmin,xgmax=xgmax,ygmin=ygmin,ygmax=ygmax,zgmin=zgmin,zgmax=zgmax,xg=xg,yg=yg,zg=zg,dmax=dmax,nmax=nmax)
-
+    
 
     #environment instance
     # E=env3d(vx,vy,vz,0,4900,0,3100,0,3000)
@@ -135,7 +136,8 @@ class CreateObstacleView(generics.GenericAPIView):
     queryset = Obstacle.objects.all()
     def post(self,request):
         gc = Geocalculation()
-        object_map_data = request.data
+        object_map_data = request.data["obstacle_data"]
+        
         
         # print(object_map_data)
         res1 = gc.get_mulptiple_object_map_point_to_space_point(object_map_data)
@@ -151,6 +153,16 @@ class CreateObstacleView(generics.GenericAPIView):
             "map_points":object_map_data,
             "space_points":res1
         }
-
-        return Response(new_object_data, status=status.HTTP_201_CREATED)
+        
+        serializer = self.serializer_class(data={"obstacle_data":new_object_data})
+        
+        serializer.is_valid(raise_exception=True)
+        # print(new_object_data)
+        try:            
+            serializer.save()
+            print(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except ValidationError as error:
+            return Response(data={"error":error}, status=status.HTTP_400_BAD_REQUEST)
+        
         

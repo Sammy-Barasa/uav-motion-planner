@@ -4,7 +4,7 @@ from pygc import great_circle, great_distance
 class Geocalculation:
     reference_long = -1.4319392
     reference_lat= 36.7052538
-    ratio = 1
+    ratio = 10
     def distance_between_set_lat_long(self,set_one,set_two):
             # start latitude and longitude
             # print(set_one)

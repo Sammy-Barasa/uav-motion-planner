@@ -16,7 +16,7 @@ class Obstacle(models.Model):
     obstacle_data = models.JSONField()
 
     def __str__(self):
-        return f"{self.description} - {self.location}"
+        return f"{self.description} - {self.obstacle_data}"
 
 
 class DroneFlight(models.Model):

@@ -23,6 +23,8 @@ urlpatterns = [
     path('',TemplateView.as_view(template_name="index.html")),
     path('home/',TemplateView.as_view(template_name="index.html")),
     path('results/',TemplateView.as_view(template_name="index.html")),
+    path('map/',TemplateView.as_view(template_name="index.html")),
+    path('createobstaclehere/',TemplateView.as_view(template_name="index.html")),
     path('locations/', LocationList.as_view(), name='location-list'),
     path('locations/<int:pk>/', LocationDetail.as_view(), name='location-detail'),
     path('obstacles/', ObstacleList.as_view(), name='obstacle-list'),
@@ -30,5 +32,5 @@ urlpatterns = [
     path('droneflights/', DroneFlightList.as_view(), name='droneflight-list'),
     path('droneflights/<int:pk>/', DroneFlightDetail.as_view(), name='droneflight-detail'),
     path('createdroneflight/', CreateDroneFlightView.as_view(), name='calculateflight'),
-    path('createobstable/', CreateObstacleView.as_view(), name='createobstacle')
+    path('createobstacle/', CreateObstacleView.as_view(), name='createobstacle')
 ]
