@@ -5,6 +5,7 @@ from .models import Location, Obstacle, DroneFlight
 from .serializers import LocationSerializer, ObstacleSerializer, DroneFlightSerializer, CreateDroneFlightSerializer, CreateObstacleSerializer
 from PathCalculator.Geocalculations import Geocalculation
 from rest_framework.exceptions import ValidationError
+import json
 
 class LocationList(generics.ListCreateAPIView):
     queryset = Location.objects.all()
@@ -14,21 +15,6 @@ class LocationList(generics.ListCreateAPIView):
 class LocationDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
-
-
-class ObstacleList(generics.ListCreateAPIView):
-    queryset = Obstacle.objects.all()
-    serializer_class = ObstacleSerializer
-
-
-class ObstacleDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Obstacle.objects.all()
-    serializer_class = ObstacleSerializer
-
-
-class DroneFlightList(generics.ListCreateAPIView):
-    queryset = DroneFlight.objects.all()
-    serializer_class = DroneFlightSerializer
 
 
 class DroneFlightDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -69,10 +55,29 @@ def ComputeNodeView(start_data, end_data):
     #obstacles known a priori
     # vx= [40,40,60,60,70,70,80,80,40,40,60,60]
     # vy= [52,100,100,52,40,60,60,40, 0,48,48, 0]
-
+    serializer= CreateObstacleSerializer(Obstacle.objects.all(),many=True)
+    # print(len(serializer.data))
+    stored_obstacles = serializer.data
     vx= [400,400,600,600,700,700,800,800,400,400,600,600]
     vy= [520,1000,1000,520,400,600,600,400,0,480,480, 0]
     vz = [0,100,0,600,500,800]
+    # print(json.dumps(stored_obstacles,indent=4))
+    for i in range(len(stored_obstacles)):
+        vx.append(stored_obstacles[i]["obstacle_data"]["space_points"]["A"]["x"])
+        vy.append(stored_obstacles[i]["obstacle_data"]["space_points"]["A"]["y"])
+        vz.append(stored_obstacles[i]["obstacle_data"]["space_points"]["A"]["h"])
+
+        vx.append(stored_obstacles[i]["obstacle_data"]["space_points"]["C"]["x"])
+        vy.append(stored_obstacles[i]["obstacle_data"]["space_points"]["C"]["y"])
+        vz.append(stored_obstacles[i]["obstacle_data"]["space_points"]["C"]["h"])
+
+        vx.append(stored_obstacles[i]["obstacle_data"]["space_points"]["B"]["x"])
+        vy.append(stored_obstacles[i]["obstacle_data"]["space_points"]["B"]["y"])
+        vz.append(stored_obstacles[i]["obstacle_data"]["space_points"]["B"]["h"])
+
+        vx.append(stored_obstacles[i]["obstacle_data"]["space_points"]["D"]["x"])
+        vy.append(stored_obstacles[i]["obstacle_data"]["space_points"]["D"]["y"])
+        vz.append(stored_obstacles[i]["obstacle_data"]["space_points"]["D"]["h"])
     #hidden obstacle
     # hvx= [150,150,250,250,250,250,350,350]
     # hvy= [150,300,300,150,400,600,600,400]
@@ -86,7 +91,7 @@ def ComputeNodeView(start_data, end_data):
 
     #environment instance
     # E=env3d(vx,vy,vz,0,4900,0,3100,0,3000)
-    E=env3d(vx,vy,vz,0,100,0,100,0,100,hvx=hvx,hvy=hvy,G=G,xgmin=xgmin,xgmax=xgmax,ygmin=ygmin,ygmax=ygmax,zgmin=zgmin,zgmax=zgmax)
+    E=env3d(vx,vy,vz,0,4900,0,3100,0,3000,hvx=hvx,hvy=hvy,G=G,xgmin=xgmin,xgmax=xgmax,ygmin=ygmin,ygmax=ygmax,zgmin=zgmin,zgmax=zgmax)
     G.set_E(E)
     G.set_G(G)
 
@@ -134,6 +139,10 @@ class CreateDroneFlightView(generics.GenericAPIView):
 class CreateObstacleView(generics.GenericAPIView):
     serializer_class = CreateObstacleSerializer
     queryset = Obstacle.objects.all()
+
+    def get(self,request):
+        serializer= self.serializer_class(self.get_queryset(),many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     def post(self,request):
         gc = Geocalculation()
         object_map_data = request.data["obstacle_data"]
@@ -165,4 +174,15 @@ class CreateObstacleView(generics.GenericAPIView):
         except ValidationError as error:
             return Response(data={"error":error}, status=status.HTTP_400_BAD_REQUEST)
         
-        
+class ObstacleList(generics.ListCreateAPIView):
+    queryset = Obstacle.objects.all()
+    serializer_class = ObstacleSerializer
+
+
+class ObstacleDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Obstacle.objects.all()
+    serializer_class = ObstacleSerializer        
+
+class DroneFlightList(generics.ListCreateAPIView):
+    queryset = DroneFlight.objects.all()
+    serializer_class = DroneFlightSerializer

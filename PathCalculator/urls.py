@@ -24,6 +24,7 @@ urlpatterns = [
     path('home/',TemplateView.as_view(template_name="index.html")),
     path('results/',TemplateView.as_view(template_name="index.html")),
     path('map/',TemplateView.as_view(template_name="index.html")),
+    path('book/',TemplateView.as_view(template_name="index.html")),
     path('createobstaclehere/',TemplateView.as_view(template_name="index.html")),
     path('locations/', LocationList.as_view(), name='location-list'),
     path('locations/<int:pk>/', LocationDetail.as_view(), name='location-detail'),
