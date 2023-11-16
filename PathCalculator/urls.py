@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from PathCalculator.views import LocationList, LocationDetail, ObstacleList, ObstacleDetail, DroneFlightList, DroneFlightDetail, CreateDroneFlightView, CreateObstacleView
+from PathCalculator.views import CreateHiddenObstacleView, LocationList, LocationDetail, ObstacleList, ObstacleDetail, DroneFlightList, DroneFlightDetail, CreateDroneFlightView, GetDroneFlightView,CreateObstacleView
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('map/',TemplateView.as_view(template_name="index.html")),
     path('book/',TemplateView.as_view(template_name="index.html")),
     path('createobstaclehere/',TemplateView.as_view(template_name="index.html")),
+    path('createhiddenobstaclehere/',TemplateView.as_view(template_name="index.html")),
     path('locations/', LocationList.as_view(), name='location-list'),
     path('locations/<int:pk>/', LocationDetail.as_view(), name='location-detail'),
     path('obstacles/', ObstacleList.as_view(), name='obstacle-list'),
@@ -33,5 +34,8 @@ urlpatterns = [
     path('droneflights/', DroneFlightList.as_view(), name='droneflight-list'),
     path('droneflights/<int:pk>/', DroneFlightDetail.as_view(), name='droneflight-detail'),
     path('createdroneflight/', CreateDroneFlightView.as_view(), name='calculateflight'),
-    path('createobstacle/', CreateObstacleView.as_view(), name='createobstacle')
+    path('getdroneflight/', GetDroneFlightView.as_view(), name='getdroneflight'),
+    path('createobstacle/', CreateObstacleView.as_view(), name='createobstacle'),
+    path('createhiddenobstacle/', CreateHiddenObstacleView.as_view(), name='createhiddenobstacle'),
+    
 ]

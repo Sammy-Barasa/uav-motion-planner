@@ -132,7 +132,7 @@ class env3d:
 				return 1
 #-----------------------------------------------------------------------------------------
 class RRT3d:
-	def __init__(self,nstart,xgmin,xgmax,ygmin,ygmax,zgmin,zgmax,xg,yg,zg,dmax,nmax):
+	def __init__(self,nstart,xgmin,xgmax,ygmin,ygmax,zgmin,zgmax,dmax,nmax):
 		(x,y,z)=nstart
 		self.x=[]
 		self.y=[]
@@ -149,9 +149,9 @@ class RRT3d:
 		self.ygmax = ygmax
 		self.zgmin = zgmin
 		self.zgmax = zgmax
-		self.xg=xg
-		self.yg=yg
-		self.zg=zg
+		self.xg=None
+		self.yg=None
+		self.zg=None
 		self.dmax =dmax
 		self.nmax =nmax
 		self.E = None
@@ -181,6 +181,18 @@ class RRT3d:
 		return		
 	def set_G(self, G):
 		self.G = G
+		return	
+	
+	def set_xg(self, xg):
+		self.xg =xg 
+		return	
+	
+	def set_yg(self, yg):
+		self.yg =yg 
+		return	
+	
+	def set_zg(self, zg):
+		self.zg =zg 
 		return	
 	#expand a random point
 	#calls subroutines to find nearest node and connect it

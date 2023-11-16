@@ -1,10 +1,8 @@
-#!/usr/bin/env python
-
-#--------------------------------------Libraries------------------------------------------
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import math
 import random
+
 
 #--------------------------------------Classes--------------------------------------------
 #Environment and Obstacles
@@ -437,10 +435,66 @@ class RRT3d:
 		#--------------------------------------Global Definitions---------------------------------
 		return data
 #--------------------------------------Global Definitions---------------------------------
-#node limit
+
+
+# gc = Geocalculation()
+# obj = {
+#     "id": 7,
+#     "flight_data_path": {
+#         "map_points": [
+#             [
+#                 -1.2812309434172726,
+#                 36.817094316887896,
+#                 104.93731101059944
+#             ],
+#             [
+#                 -1.2820258068659425,
+#                 36.815387698416764,
+#                 100
+#             ]
+#         ],
+#         "space_points": [
+#             [
+#                 1244.6951810820822,
+#                 1666.4257292083162,
+#                 104.93731101059944
+#             ],
+#             [
+#                 1225.7014947281782,
+#                 1657.6374217557875,
+#                 100
+#             ]
+#         ]
+#     },
+#     "start": {
+#         "lat": -1.282025806859283,
+#         "long": 36.8153876984217,
+#         "h": 100
+#     },
+#     "end": {
+#         "lat": -1.2812469012197742,
+#         "long": 36.817182368177306,
+#         "h": 100
+#     },
+#     "date_field": "null"
+# }
+# data = {"start_location":obj["start"],
+# 		"end_location":obj["end"]
+# 		}
+# start_location = data["start_location"]
+# end_location = data["end_location"]
+
+# res1 = gc.get_single_map_point_to_space_point([start_location["lat"],start_location["long"],start_location["h"]])
+# res2 = gc.get_single_map_point_to_space_point([end_location["lat"],end_location["long"],end_location["h"]])
+
+# #node limit
+# start_data = res1
+# end_data = res2
 nmax = 5000
 
-#goal region
+# xg=end_data["x"]
+# yg=end_data["y"]
+# zg=end_data["h"]
 xg=5
 yg=5
 zg=5
@@ -456,19 +510,74 @@ zgmax=zg+epsilon
 #extend step size
 dmax = 5
 #start the root of the tree
-nstart =(100,100,100) 
-
+# nstart =(start_data["x"],start_data["y"],start_data["h"]) 
+nstart =(80,80,100) 
 #specify vertices for rectangular obstacles (each object has four vertices)
 #obstacles known a priori
-# vx= [40,40,60,60,70,70,80,80,40,40,60,60]
-# vy= [52,100,100,52,40,60,60,40, 0,48,48, 0]
-
 vx= [40,40,60,60,70,70,80,80,40,40,60,60]
-vy= [52,100,100,52,40,60,60,40,0,48,48, 0]
-vz = [100,80,60]
-#hidden obstacle
+vy= [52,100,100,52,40,60,60,40, 0,48,48, 0]
+# serializer= CreateObstacleSerializer(Obstacle.objects.all(),many=True)
+# print(len(serializer.data))
+# stored_obstacles = serializer.data
+# vx= [400,400,600,600,700,700,800,800,400,400,600,600]
+# vy= [520,1000,1000,520,400,600,600,400,0,480,480, 0]
+# vx =[]
+# vy =[]
+vz = [0,100]
+# print(json.dumps(stored_obstacles,indent=4))
+# for i in range(len(stored_obstacles)):
+# 	vx.append(stored_obstacles[i]["obstacle_data"]["space_points"]["A"]["x"])
+# 	vy.append(stored_obstacles[i]["obstacle_data"]["space_points"]["A"]["y"])
+# 	vz.append(stored_obstacles[i]["obstacle_data"]["space_points"]["A"]["h"])
+
+# 	vx.append(stored_obstacles[i]["obstacle_data"]["space_points"]["C"]["x"])
+# 	vy.append(stored_obstacles[i]["obstacle_data"]["space_points"]["C"]["y"])
+# 	vz.append(stored_obstacles[i]["obstacle_data"]["space_points"]["C"]["h"])
+
+# 	vx.append(stored_obstacles[i]["obstacle_data"]["space_points"]["B"]["x"])
+# 	vy.append(stored_obstacles[i]["obstacle_data"]["space_points"]["B"]["y"])
+# 	vz.append(stored_obstacles[i]["obstacle_data"]["space_points"]["B"]["h"])
+
+# 	vx.append(stored_obstacles[i]["obstacle_data"]["space_points"]["D"]["x"])
+# 	vy.append(stored_obstacles[i]["obstacle_data"]["space_points"]["D"]["y"])
+# 	vz.append(stored_obstacles[i]["obstacle_data"]["space_points"]["D"]["h"])
+    #hidden obstacle
+    # hvx= [150,150,250,250,250,250,350,350]
+    # hvy= [150,300,300,150,400,600,600,400]
+
+# hidden obstacle
 hvx= [15,15,25,25,25,25,35,35]
 hvy= [15,30,30,15,40,60,60,40]
+
+# #goal region
+# xg=5
+# yg=5
+# zg=5
+# epsilon=5
+# xgmin=xg-epsilon
+# xgmax=xg+epsilon
+# ygmin=yg-epsilon
+# ygmax=yg+epsilon
+# zgmin=zg-epsilon
+# zgmax=zg+epsilon
+
+
+# #extend step size
+# dmax = 5
+# #start the root of the tree
+# nstart =(100,100,100) 
+
+# #specify vertices for rectangular obstacles (each object has four vertices)
+# #obstacles known a priori
+# # vx= [40,40,60,60,70,70,80,80,40,40,60,60]
+# # vy= [52,100,100,52,40,60,60,40, 0,48,48, 0]
+
+# vx= [40,40,60,60,70,70,80,80,40,40,60,60]
+# vy= [52,100,100,52,40,60,60,40,0,48,48, 0]
+# vz = [100,80,60]
+#hidden obstacle
+# hvx= []
+# hvy= []
 
 #create an RRT tree with a start node
 G=RRT3d(nstart)
@@ -518,7 +627,7 @@ def draw ():
 
 
 #--------------------------------------RRT Implementation---------------------------------
-def main():
+def call_syst():
 	
 	#balance between extending and biasing	
 	for i in range(0,nmax):
@@ -542,6 +651,6 @@ def main():
 	
 	
 # run main when RRT is called
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+call_syst()
 	# run_rtt_api()
