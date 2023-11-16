@@ -71,8 +71,8 @@ def delete_all_rows_from_table(db_file, table_name):
 # Replace 'your_db_file.sqlite3' and 'your_table_name' with your actual database file and table name
 # delete_all_rows_from_table('db.sqlite3', 'PathCalculator_hiddenobstacle')
 # delete_all_rows_from_table('db.sqlite3', 'PathCalculator_obstacle')
-delete_all_rows_from_table('db.sqlite3', 'PathCalculator_droneflightpath')
-# Call the function to list tables
+# delete_all_rows_from_table('db.sqlite3', 'PathCalculator_droneflightpath')
+# # Call the function to list tables
 # list_tables()
 # Replace 'your_table_name' with the actual name of the table you want to drop
 # drop_table('PathCalculator_droneflightpath')
