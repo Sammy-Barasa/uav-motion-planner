@@ -20,10 +20,7 @@ __pycache__
 .pytest_cache
 output
 project
-myApp
-# dependencies
-frontend/node_modules
-frontend/.pnp
+myApp/
 .pnp.js
 
 # testing
