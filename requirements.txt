@@ -5,7 +5,7 @@ Dijkstar==2.6.0
 Django==4.2.6
 django-cors-headers==4.3.0
 djangorestframework==3.14.0
-fonttools==4.42.1
+fonttools==4.43.0
 kiwisolver==1.4.5
 matplotlib==3.8.0
 numpy==1.26.0
